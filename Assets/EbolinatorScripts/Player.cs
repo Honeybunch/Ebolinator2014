@@ -8,8 +8,6 @@ public class Player : MonoBehaviour {
 	string interactionText;
 	bool displayInteractionText;
 
-	InteractionItem lastInteractionItem;
-
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
@@ -33,18 +31,18 @@ public class Player : MonoBehaviour {
 		{				
 			GameObject hitObject = hit.transform.gameObject;
 			
-			lastInteractionItem = hitObject.GetComponent<InteractionItem>();
+			InteractionItem interactionItem = hitObject.GetComponent<InteractionItem>();
 
-			if(lastInteractionItem != null)
+			if(interactionItem != null)
 			{
 				//Set flag so we can display interaction text in OnGUI
 				displayInteractionText = true;
 		
-				lastInteractionItem.selected = true;
+				interactionItem.selected = true;
 
 				if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
 				{
-					Debug.Log("Interaction!");
+					interactionItem.Interaction();
 				}
 			}
 		}

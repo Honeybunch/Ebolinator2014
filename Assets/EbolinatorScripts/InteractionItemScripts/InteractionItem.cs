@@ -29,6 +29,11 @@ public class InteractionItem : MonoBehaviour
 		selected = false;
 	}
 
+	public virtual void Interaction()
+	{
+		Debug.Log("This interaction needs to be overridden");
+	}
+	
 	/// <summary>
 	/// Sets the color of the outline.
 	/// </summary>

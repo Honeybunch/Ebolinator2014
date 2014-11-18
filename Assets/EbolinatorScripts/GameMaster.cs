@@ -19,14 +19,23 @@ public class GameMaster : MonoBehaviour {
 	GameState state = GameState.game;
 	// Use this for initialization
 	void OnGUI(){
+		//Just to test
+		SetUpLevel(6, 10);
 		switch(state){
 		case GameState.game:
 			GUI.skin = ebolaskin;
 			GUI.Label( new Rect(50,50,177,75), "Infected: " + infectedCount + "/" + infectedQuota);
 			GUI.Label( new Rect(50,150,177,75), "Interactions: " + interactionCount + "/" + interactionMax);
-			Update();
+			UpdateGame();
+			break;
+		case GameState.win:
+			GUI.Label(new Rect(Screen.width/2, Screen.height/2, 500, 100), "Level Completed");
+			break;
+		case GameState.lose:
+			GUI.Label(new Rect(Screen.width/2, Screen.height/2, 500, 100), "Failure");
 			break;
 		}
+
 	}
 	/*Set up level
 		max - The maximum amount of interactions this level
@@ -45,10 +54,10 @@ public class GameMaster : MonoBehaviour {
 		interactionCount += 1;
 		infectedCount +=points;
 	}
-	/*Update
+	/*UpdateGame
 		check if level completed or lost
 	*/
-	void Update(){
+	void UpdateGame(){
 		if(infectedCount >= infectedQuota){
 			infectedCount = infectedQuota;
 			state = GameState.win;

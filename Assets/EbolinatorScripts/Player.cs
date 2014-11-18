@@ -8,9 +8,6 @@ public class Player : MonoBehaviour {
 	string interactionText;
 	bool displayInteractionText;
 
-	float raycastTimer;
-	float raycastTimerMax;
-
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
@@ -18,9 +15,6 @@ public class Player : MonoBehaviour {
 	{
 		interactionText = "Press E or Left Mouse Button To Interact";
 		displayInteractionText = false;
-
-		raycastTimer = 0;
-		raycastTimerMax = .1f;
 
 		playerCamera = Camera.main;
 	}
@@ -31,56 +25,31 @@ public class Player : MonoBehaviour {
 	/// </summary>
 	void Update ()
 	{
-		//Do a raycast every few milliseconds to see if we're in front of something
-		raycastTimer += Time.deltaTime;
+		//Fire a raycast
+		RaycastHit hit;
+		if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
+		{				
+			GameObject hitObject = hit.transform.gameObject;
+			
+			InteractionItem interactionItem = hitObject.GetComponent<InteractionItem>();
 
-		if(raycastTimer > raycastTimerMax)
-		{
-			raycastTimer = 0;
-
-			//Fire a raycast
-			RaycastHit hit;
-			if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 5))
+			if(interactionItem != null)
 			{
-				Debug.Log("Raycast - Automatic!");
-				
-				GameObject hitObject = hit.transform.gameObject;
-				InteractionItem interaction = null;
-				
-				interaction = hitObject.GetComponent<InteractionItem>();
-				
-				if(interaction != null)
-					displayInteractionText = true;
-			}
-			else
-			{
-				displayInteractionText = false;
-			}
-		}
+				//Set flag so we can display interaction text in OnGUI
+				displayInteractionText = true;
+		
+				interactionItem.selected = true;
 
-
-		if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
-		{
-			//Raycast out in the forward direction
-			//If we hit an object with an interactable object script, interact with it
-			RaycastHit hit;
-			if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 5))
-			{
-				Debug.Log("Raycast");
-
-				GameObject hitObject = hit.transform.gameObject;
-				InteractionItem interaction = null;
-
-				interaction = hitObject.GetComponent<InteractionItem>();
-
-				if(interaction != null)
+				if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
 				{
-					Debug.Log("Interaction!");
+					interactionItem.Interaction();
 				}
 			}
-
 		}
-
+		else
+		{
+			displayInteractionText = false;
+		}
 	}
 
 	/// <summary>
@@ -99,9 +68,9 @@ public class Player : MonoBehaviour {
 			float halfScreenWidth = Screen.width / 2;
 			float halfScreenHeight = Screen.height / 2;
 
-			Rect interactionTextRect = new Rect(halfScreenWidth - halfTextWidth/2, halfScreenHeight + 200, textWidth, textHeight);
+			Rect interactionTextRect = new Rect(halfScreenWidth - halfTextWidth/2, halfScreenHeight + 200, textWidth + 12, textHeight);
 
-			GUI.TextArea(interactionTextRect, interactionText);
+			GUI.Box(interactionTextRect, interactionText);
 		}
 	}
 }

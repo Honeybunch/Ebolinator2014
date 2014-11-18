@@ -6,5 +6,7 @@ public class TestCubeInteraction : InteractionItem
 	public override void Interaction()
 	{
 		rigidbody.AddForce(new Vector3(100, 0, 100));
+
+		//TODO: Modify game master points etc;
 	}
 }

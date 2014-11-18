@@ -9,10 +9,14 @@ public class InteractionItem : MonoBehaviour
 	Material material;
 	bool materialHasOutline;
 
+	protected GameMaster gameMaster;
+
 	// Use this for initialization
 	void Start ()
 	{
 		material = renderer.material;
+
+		gameMaster = GameObject.Find("GameMaster").GetComponent<GameMaster>();
 
 		if(material.name.Contains("Outline"))
 		   materialHasOutline = true;

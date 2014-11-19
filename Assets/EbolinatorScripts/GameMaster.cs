@@ -17,10 +17,13 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	GameState state = GameState.game;
+	void Start(){
+		SetUpLevel(6, 10);
+	}
+
 	// Use this for initialization
 	void OnGUI(){
 		//Just to test
-		SetUpLevel(6, 10);
 		switch(state){
 		case GameState.game:
 			GUI.skin = ebolaskin;
@@ -50,9 +53,10 @@ public class GameMaster : MonoBehaviour {
 	/*Interact
 	 	points - how many people does this infect
 	*/
-	public void Interact(int points){
+	public void Interact(int points)
+	{
 		interactionCount += 1;
-		infectedCount +=points;
+		infectedCount += points;
 	}
 	/*UpdateGame
 		check if level completed or lost

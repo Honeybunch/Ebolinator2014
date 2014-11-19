@@ -7,6 +7,6 @@ public class TestCubeInteraction : InteractionItem
 	{
 		rigidbody.AddForce(new Vector3(100, 0, 100));
 
-		//TODO: Modify game master points etc;
+		gameMaster.Interact(1);
 	}
 }

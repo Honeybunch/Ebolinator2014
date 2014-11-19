@@ -1,50 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractionItem : MonoBehaviour
+public class InteractionItem : Selectable
 {
-	[HideInInspector]
-	public bool selected;
-
-	Material material;
-	bool materialHasOutline;
-
 	protected GameMaster gameMaster;
 
 	// Use this for initialization
-	void Start ()
+	public override void Start ()
 	{
-		material = renderer.material;
-
 		gameMaster = GameObject.Find("GameMaster").GetComponent<GameMaster>();
-
-		if(material.name.Contains("Outline"))
-		   materialHasOutline = true;
+		base.Start();
 	}
-	
+
 	// Update is called once per frame
-	void Update ()
+	public override void Update ()
 	{
-		if(selected)
+		base.Update();
+	}
+
+	public override void HandleSelection()
+	{
+		if(Selected)
 			SetOutlineColor(Color.green);
 		else
 			SetOutlineColor(Color.black);
 
-		selected = false;
+		Selected = false;
 	}
 
 	public virtual void Interaction()
 	{
 		Debug.Log("This interaction needs to be overridden");
-	}
-	
-	/// <summary>
-	/// Sets the color of the outline.
-	/// </summary>
-	/// <param name="color">Color.</param>
-	public void SetOutlineColor(Color color)
-	{
-		if(materialHasOutline)
-			material.SetColor("_OutlineColor", color);
 	}
 }

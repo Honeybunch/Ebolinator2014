@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 	void Start () 
 	{
 		interactionText = "Press E or Left Mouse Button To Interact";
-		pickupText = "Press E or Left Moust Button to Pick Up";
+		pickupText = "Press E or Left Mouse Button to Pick Up";
 
 		displayInteractionText = false;
 		displayPickupText = false;
@@ -36,7 +36,6 @@ public class Player : MonoBehaviour {
 		if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
 		{				
 			GameObject hitObject = hit.transform.gameObject;
-			
 			InteractionItem interactionItem = hitObject.GetComponent<InteractionItem>();
 			PickupableItem pickupableItem = hitObject.GetComponent<PickupableItem>();
 

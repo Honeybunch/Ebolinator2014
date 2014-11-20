@@ -33,7 +33,7 @@ public class Selectable : MonoBehaviour
 	{
 		material = renderer.material;
 
-		if(material.name.Contains("Outline"))
+		if(material.shader.name.Contains("Outline"))
 			materialHasOutline = true;
 	}
 	

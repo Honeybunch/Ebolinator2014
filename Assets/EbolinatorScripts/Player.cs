@@ -5,11 +5,17 @@ public class Player : MonoBehaviour {
 
 	Camera playerCamera;
 
+	AudioSource audioSource;
+	AudioClip goodBeep;
+	AudioClip badBeep;
+
 	string interactionText;
 	string pickupText;
 
 	bool displayInteractionText;
 	bool displayPickupText;
+
+	GUIStyle style;
 
 	/// <summary>
 	/// Start this instance.
@@ -23,6 +29,12 @@ public class Player : MonoBehaviour {
 		displayPickupText = false;
 
 		playerCamera = Camera.main;
+
+		style = new GUIStyle();
+
+		audioSource = GetComponent<AudioSource>();
+		goodBeep = (AudioClip)Resources.Load("Sounds/goodbeep");
+		badBeep = (AudioClip)Resources.Load("Sounds/badbeep");
 	}
 	
 	/// <summary>
@@ -47,7 +59,16 @@ public class Player : MonoBehaviour {
 				interactionItem.Selected = true;
 
 				if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
+				{
 					interactionItem.Interaction();
+
+					if(interactionItem.exhausted)
+						audioSource.clip = badBeep;
+					else
+						audioSource.clip = goodBeep;
+
+					audioSource.Play();
+				}
 
 			}
 			else if(pickupableItem != null)
@@ -58,7 +79,10 @@ public class Player : MonoBehaviour {
 				pickupableItem.Selected = true;
 
 				if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
+				{
+
 					pickupableItem.Pickup();
+				}
 			}
 		}
 		else
@@ -73,9 +97,12 @@ public class Player : MonoBehaviour {
 	/// </summary>
 	void OnGUI()
 	{
+		style = GUI.skin.GetStyle("Box");
+		style.fontSize = 16;
+
 		if(displayInteractionText)
 		{
-			Vector2 textSize = GUI.skin.GetStyle("TextArea").CalcSize(new GUIContent(interactionText));
+			Vector2 textSize = style.CalcSize(new GUIContent(interactionText));
 			float textWidth = textSize.x;
 			float textHeight = textSize.y;
 
@@ -86,11 +113,11 @@ public class Player : MonoBehaviour {
 
 			Rect interactionTextRect = new Rect(halfScreenWidth - halfTextWidth/2, halfScreenHeight + 200, textWidth + 12, textHeight);
 
-			GUI.Box(interactionTextRect, interactionText);
+			GUI.Box(interactionTextRect, interactionText, style);
 		}
 		else if(displayPickupText)
 		{
-			Vector2 textSize = GUI.skin.GetStyle("TextArea").CalcSize(new GUIContent(pickupText));
+			Vector2 textSize = style.CalcSize(new GUIContent(pickupText));
 			float textWidth = textSize.x;
 			float textHeight = textSize.y;
 			
@@ -99,9 +126,9 @@ public class Player : MonoBehaviour {
 			float halfScreenWidth = Screen.width / 2;
 			float halfScreenHeight = Screen.height / 2;
 			
-			Rect pickupTextRect = new Rect(halfScreenWidth - halfTextWidth/2, halfScreenHeight + 200, textWidth + 12, textHeight);
+			Rect pickupTextRect = new Rect(halfScreenWidth - halfTextWidth/2, Screen.height - halfScreenHeight/2, textWidth + 12, textHeight);
 			
-			GUI.Box(pickupTextRect, pickupText);
+			GUI.Box(pickupTextRect, pickupText, style);
 		}
 	}
 }

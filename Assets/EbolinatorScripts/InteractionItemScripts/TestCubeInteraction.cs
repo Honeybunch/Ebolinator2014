@@ -10,7 +10,10 @@ public class TestCubeInteraction : InteractionItem
 	{
 		rigidbody.AddForce(new Vector3(100, 0, 100));
 
-		if(usedInteractionCount < allowedInteractionCount)
+		if(usedInteractionCount >= allowedInteractionCount)
+			exhausted = true;
+
+		if(!exhausted)
 		{
 			gameMaster.Interact(1);
 			usedInteractionCount++;

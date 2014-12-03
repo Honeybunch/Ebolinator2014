@@ -10,6 +10,9 @@ public class GameMaster : MonoBehaviour {
 	int interactionMax; //How many interactions are we allowed this level
 	int infectedQuota;	//How many people do we need to put at risk this level
 
+	public Texture2D success;
+	public Texture2D failure;
+
 	public enum GameState{
 		game,
 		win,
@@ -19,6 +22,7 @@ public class GameMaster : MonoBehaviour {
 	GameState state = GameState.game;
 	void Start(){
 		SetUpLevel(6, 10);
+		state = GameState.lose;
 	}
 
 	// Use this for initialization
@@ -32,10 +36,10 @@ public class GameMaster : MonoBehaviour {
 			UpdateGame();
 			break;
 		case GameState.win:
-			GUI.Label(new Rect(Screen.width/2, Screen.height/2, 500, 100), "Level Completed");
+			GUI.DrawTexture (new Rect(Screen.width/2 - 578/2, Screen.height/2 - 224/2, 578, 224), success);
 			break;
 		case GameState.lose:
-			GUI.Label(new Rect(Screen.width/2, Screen.height/2, 500, 100), "Failure");
+			GUI.DrawTexture(new Rect(Screen.width/2 - 578/2, Screen.height/2 - 224/2, 578, 224), failure);
 			break;
 		}
 

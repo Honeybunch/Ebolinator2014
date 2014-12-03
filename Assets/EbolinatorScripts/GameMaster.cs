@@ -22,7 +22,7 @@ public class GameMaster : MonoBehaviour {
 	GameState state = GameState.game;
 	void Start(){
 		SetUpLevel(6, 10);
-		state = GameState.lose;
+		//state = GameState.lose;
 	}
 
 	// Use this for initialization

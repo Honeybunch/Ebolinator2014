@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
 	{
 		//Fire a raycast
 		RaycastHit hit;
-		if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
+		if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 4))
 		{				
 			GameObject hitObject = hit.transform.gameObject;
 			InteractionItem interactionItem = hitObject.GetComponent<InteractionItem>();

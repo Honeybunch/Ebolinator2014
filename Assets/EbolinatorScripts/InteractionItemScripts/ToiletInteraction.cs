@@ -8,8 +8,10 @@ public class ToiletInteraction : InteractionItem
 	
 	public override void Interaction()
 	{
+		if(usedInteractionCount >= allowedInteractionCount)
+			exhausted = true;
 		
-		if(usedInteractionCount < allowedInteractionCount)
+		if(!exhausted)
 		{
 			gameMaster.Interact(2);
 			usedInteractionCount++;

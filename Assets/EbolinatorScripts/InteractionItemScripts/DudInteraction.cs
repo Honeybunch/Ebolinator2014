@@ -8,8 +8,11 @@ public class DudInteraction : InteractionItem {
 	
 	public override void Interaction()
 	{
-		
-		if(usedInteractionCount < allowedInteractionCount)
+
+		if(usedInteractionCount >= allowedInteractionCount)
+			exhausted = true;
+
+		if(!exhausted)
 		{
 			gameMaster.Interact(0);
 			usedInteractionCount++;

@@ -4,6 +4,7 @@ using System.Collections;
 public class InteractionItem : Selectable
 {
 	protected GameMaster gameMaster;
+	public bool exhausted = false;
 
 	// Use this for initialization
 	public override void Start ()

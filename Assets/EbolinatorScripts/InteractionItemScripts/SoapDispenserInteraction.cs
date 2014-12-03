@@ -8,8 +8,14 @@ public class SoapDispenserInteraction : InteractionItem
 	
 	public override void Interaction()
 	{
-		
-		if(usedInteractionCount < allowedInteractionCount)
+		rigidbody.useGravity = true;
+		rigidbody.AddTorque(new Vector3(5.0f, 0.1f, 0.1f));
+		rigidbody.AddForce(new Vector3(10.0f, 0.0f, -500.0f));
+
+		if(usedInteractionCount >= allowedInteractionCount)
+			exhausted = true;
+
+		if(!exhausted)
 		{
 			gameMaster.Interact(3);
 			usedInteractionCount++;

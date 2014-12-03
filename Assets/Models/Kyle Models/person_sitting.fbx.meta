@@ -50,6 +50,7 @@ ModelImporter:
     2300000: polySurface8
     3300000: polySurface8
     4300000: polySurface8
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1

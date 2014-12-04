@@ -21,7 +21,7 @@ public class GameMaster : MonoBehaviour {
 
 	GameState state = GameState.game;
 	void Start(){
-		SetUpLevel(6, 10);
+		SetUpLevel(6, 7);
 		//state = GameState.lose;
 	}
 

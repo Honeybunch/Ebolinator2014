@@ -71,7 +71,7 @@ public class GameMaster : MonoBehaviour {
 			state = GameState.win;
 		}
 
-		if(interactionCount >= interactionMax){
+		else if(interactionCount >= interactionMax){
 			interactionCount = interactionMax;
 			state = GameState.lose;
 		}

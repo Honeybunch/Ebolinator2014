@@ -24,6 +24,7 @@ public class SoapDispenserInteraction : InteractionItem
 		else
 		{
 			gameMaster.Interact(0);
+			ExhaustedMessage();
 		}
 	}
 }

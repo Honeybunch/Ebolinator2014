@@ -38,10 +38,14 @@ public class InteractionItem : Selectable
 	public IEnumerator ShowMessage (string message, float delay) {
 		GameObject textObj = GameObject.Find("popUpText");
 		GUIText text = textObj.GetComponent<GUIText>();
-		text.pixelOffset = new Vector2(Random.Range(-10,10), Random.Range(-10,10));
+		text.pixelOffset = new Vector2(Random.Range(-50,50), Random.Range(-10,10));
 		text.text = message;
 		text.enabled = true;
 		yield return new WaitForSeconds(delay);
 		text.enabled = false;
+	}
+
+	public void ExhaustedMessage(){
+		StartCoroutine(ShowMessage("Already did that! +0", 2));
 	}
 }

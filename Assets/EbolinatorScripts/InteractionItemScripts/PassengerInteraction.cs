@@ -1,28 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ToiletInteraction : InteractionItem
-{
-	int allowedInteractionCount = 1;
+public class PassengerInteraction : InteractionItem {
+	
+	int allowedInteractionCount = 0;
 	int usedInteractionCount = 0;
-	public ParticleSystem urine;
-
+	
 	public override void Interaction()
 	{
+		
 		if(usedInteractionCount >= allowedInteractionCount)
 			exhausted = true;
 		
 		if(!exhausted)
 		{
-			gameMaster.Interact(2);
-			urine.Play();
+			gameMaster.Interact(0);
 			usedInteractionCount++;
-			StartCoroutine(ShowMessage("Bad aim! +2", 2));
 		}
 		else
 		{
 			gameMaster.Interact(0);
-			ExhaustedMessage();
+			StartCoroutine(ShowMessage("High Five! +0", 2));
 		}
 	}
 }

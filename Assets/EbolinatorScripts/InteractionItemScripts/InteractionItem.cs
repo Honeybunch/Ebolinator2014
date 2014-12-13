@@ -33,4 +33,15 @@ public class InteractionItem : Selectable
 	{
 		Debug.Log("This interaction needs to be overridden");
 	}
+
+	//Found on unityAnswers, credit to user Eric5h5 
+	public IEnumerator ShowMessage (string message, float delay) {
+		GameObject textObj = GameObject.Find("popUpText");
+		GUIText text = textObj.GetComponent<GUIText>();
+		text.pixelOffset = new Vector2(Random.Range(-10,10), Random.Range(-10,10));
+		text.text = message;
+		text.enabled = true;
+		yield return new WaitForSeconds(delay);
+		text.enabled = false;
+	}
 }

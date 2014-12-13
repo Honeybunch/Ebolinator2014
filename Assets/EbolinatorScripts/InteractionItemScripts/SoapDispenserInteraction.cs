@@ -19,6 +19,7 @@ public class SoapDispenserInteraction : InteractionItem
 		{
 			gameMaster.Interact(3);
 			usedInteractionCount++;
+			StartCoroutine(ShowMessage("No soap for you! +3", 2));
 		}
 		else
 		{

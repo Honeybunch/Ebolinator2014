@@ -31,8 +31,8 @@ public class GameMaster : MonoBehaviour {
 		switch(state){
 		case GameState.game:
 			GUI.skin = ebolaskin;
-			GUI.Label( new Rect(50,50,177,75), "Infected: " + infectedCount + "/" + infectedQuota);
-			GUI.Label( new Rect(50,150,177,75), "Interactions: " + interactionCount + "/" + interactionMax);
+			GUI.Label( new Rect(75,75,250,75), "Infected: " + infectedCount + "/" + infectedQuota);
+			GUI.Label( new Rect(75,175,250,75), "Interactions: " + interactionCount + "/" + interactionMax);
 			UpdateGame();
 			break;
 		case GameState.win:
